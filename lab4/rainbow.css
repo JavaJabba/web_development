@@ -1,0 +1,41 @@
+body {
+    background-color: lightgreen;
+    color: blue;
+}
+
+#definition em {
+    color: red;
+}
+
+#definition b {
+    color: red;
+}
+
+.question {
+    background-color: black;
+    color: white;
+}
+
+#bow  li {
+    background-color: rebeccapurple;
+    color: white;
+}
+
+#bow li b {
+    color: white;
+} 
+
+#reading li{
+    background-color: white;
+}
+
+#reading i{
+    color: black;
+}
+
+li ~ li{
+    color: red;
+}
+
+
+
