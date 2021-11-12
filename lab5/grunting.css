@@ -1,0 +1,55 @@
+html {
+    background-image: url("images/image01.jpg");
+    --base-bgcolour: rgb(134, 74, 45);
+    --main-colour: rgb(116, 37, 37);
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 16px;
+    color: white;
+}
+
+header, footer {
+    background-color: white;
+    color: black;
+    padding: 2em;
+    border-width: 4px;
+    border-radius: 2em;
+    border-style: solid;
+    border-color: var(--main-colour);
+    text-align: center;
+    padding: 5px;
+    margin: 3em;
+}
+
+main {
+    margin: 3em;
+    padding: 2em;
+    border-width: 4px;
+    border-radius: 2em;
+    border-color: var(--main-colour);
+    box-sizing: border-box; 
+}
+
+section {
+    background-color: var(--base-bgcolour);
+    padding: 2em;
+    border-width: 4px;
+    border-radius: 2em;
+    border-style: solid;
+    border-color: var(--main-colour);
+    box-sizing: content-box;
+}
+
+main > p {
+    background-color: var(--base-bgcolour);
+    font-size: 1.25em;
+    text-align: center;
+    padding: 2em;
+    margin: 0px;
+    border-width: 4px;
+    border-radius: 2em;
+    border-style: solid;
+    border-color: var(--main-colour);
+}
+
+
+
