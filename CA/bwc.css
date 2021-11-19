@@ -1,0 +1,31 @@
+html{
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 16px;
+}
+
+header{
+    background-color: black;
+    opacity: 60%;
+    box-sizing: content-box;
+    max-width: 100%;
+}
+
+img{
+    max-width: 100%;
+}
+
+header img{
+    max-width: 5rem;
+}
+
+nav a{
+    text-align: center;
+    display: inline-flex;
+    list-style: none;
+}
+
+section {
+    margin-top: 4rem;
+    box-sizing: content-box;
+    
+}
