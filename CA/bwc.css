@@ -1,31 +1,93 @@
 html{
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     font-size: 16px;
+    --bgcolour-one: #262626;
+    --bgcolour-two: #e6e6e6;
+    scroll-behavior: smooth;
+    background-color: var(--bgcolour-one);
 }
 
 header{
-    background-color: black;
-    opacity: 60%;
+    background-color: var(--bgcolour-one);
+    padding: 1rem;
+    margin: 0;
     box-sizing: content-box;
-    max-width: 100%;
+}
+
+header img{
+    max-height: 5rem;
+    float: left;
+    padding-right: 40rem;
+}
+
+nav ul {
+    display: flex;
+    list-style: none;
+    justify-content: space-evenly;
+}
+
+nav li a{
+    color: white;
+    text-decoration: none;
+    padding-bottom: 2rem;
 }
 
 img{
     max-width: 100%;
 }
 
-header img{
-    max-width: 5rem;
+#stripeone {
+    height: 35rem;
+    margin: 0;
+    padding: 1rem;
+    color: white;
+    background-color: var(--bgcolour-one);
 }
 
-nav a{
-    text-align: center;
-    display: inline-flex;
+#stripeone img{
+    display: flex;
+    max-height: 32rem;
+    padding-right: 2rem;
+    padding-top: 1rem;
+    float: left;
+}
+
+a{
+    text-decoration: none;
+    color: #66a3ff;
+}
+
+li h2:hover{
+    background-color: var(--bgcolour-two);
+    color: var(--bgcolour-one);
+    margin: 1rem;
+}
+
+#stripeone li {
     list-style: none;
 }
 
-section {
-    margin-top: 4rem;
-    box-sizing: content-box;
-    
+#stripeone h1{
+    padding-top: 1rem;
 }
+
+#stripetwo {
+    height: 20rem;
+    margin: 0;
+    font-size: 2rem;
+    padding-top: 2rem;
+    padding-right: 2rem;
+    padding-left: 2rem;
+    text-align: center;
+    background-color: var(--bgcolour-two);
+}
+
+footer{
+    background-color: var(--bgcolour-one);
+    text-align: center;
+    color: white;
+    padding: 1rem;
+    margin: 0;
+    box-sizing: content-box;
+}
+
