@@ -74,12 +74,77 @@ li h2:hover{
 #stripetwo {
     height: 20rem;
     margin: 0;
-    font-size: 2rem;
+    font-size: 1.25rem;
     padding-top: 2rem;
     padding-right: 2rem;
     padding-left: 2rem;
     text-align: center;
     background-color: var(--bgcolour-two);
+}
+
+#gallery {
+    height: 67rem;
+    margin: 0;
+    padding: 1rem;
+    color: white;
+    background-color: var(--bgcolour-one);
+}
+
+#image {
+    display: flex;
+    align-items: center;
+    float: left;
+    margin-left: 3.5rem;
+    border: 1px solid #777;
+}
+
+#image img{
+    width: 300px;
+    height: 300px;
+}
+
+#image:hover {
+    border: 1px solid #ccc;
+}
+
+#gallery h1 {
+    text-align: center;
+}
+
+#form {
+    height: 75rem;
+    padding: 1rem;
+    text-align: center;
+    background-color: var(--bgcolour-two);
+}
+
+#social {
+    display: flex;
+    align-items: center;
+    float: left;
+    margin-left: 3.5rem;
+}
+#social img{
+    width: 300px;
+    height: 300px;
+}
+
+#email{
+    float: center;
+    width: 150px;
+    height: 150px;
+}
+
+#socialgallery {
+    height: 30rem;
+    margin: 0;
+    padding: 1rem;
+    color: white;
+    background-color: var(--bgcolour-one);
+}
+
+#socialgallery h1 {
+    text-align: center;
 }
 
 footer{
