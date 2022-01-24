@@ -35,6 +35,6 @@ def send_parting_by_name(name):
     return "Goodbye, " + name
 
 
-@app.errorhandler(404)
-def page_not_found(error):
-    return "Ah, you fucked it!", 404
+# @app.errorhandler(404)
+# def page_not_found(error):
+#     return "Ah, you fucked it!", 404
