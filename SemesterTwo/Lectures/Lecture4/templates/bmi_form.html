@@ -1,4 +1,4 @@
-{% extends base.html %}
+{% extends "base.html" %}
 
 {% block main_content %}
 
@@ -8,11 +8,13 @@
     <input type="text" size="50" name="weight" id="weight" value="{{ weight }}"/>
     <br />
     <br />
-    <label for="height">Height in metres:</label>
+    <label for="height">Height in metres:   </label>
     <input type="text" size="50" name="height" id="height" value="{{ height }}"/>
-    <br/>
+    <br />
+    <br />
     <label for="bmi">BMI:</label>
     <input type="text" name="bmi" id="bmi" value="{{ bmi }}" disabled/>
+    <br />
     <br />
     <input type="submit" />
     

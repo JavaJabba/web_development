@@ -1,4 +1,3 @@
-from crypt import methods
 from flask import Flask, render_template, request
 
 
@@ -20,7 +19,7 @@ def morse():
 
 @app.route("/bmi", methods=["GET", "POST"])
 def bmi():
-    if request.methods == "GET":
+    if request.method == "GET":
         return render_template("bmi_form.html", bmi="", weight="", height="")
     else:
         weight = request.form("weight")
