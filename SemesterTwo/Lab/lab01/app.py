@@ -1,4 +1,4 @@
-from random import choice
+from random import choice, randint
 from flask import Flask, render_template
 
 app = Flask(__name__)
@@ -33,3 +33,12 @@ def rps(player):
         return render_template("rps.html", player=player, computer=computer, message=message)
 
 
+@app.route("/could_it_be_me/<num_lines>")
+def send_lotto_numbers(num_lines):
+    line = []
+    num_lines = int(num_lines)
+    for num in range(1, num_lines):
+        for i in range(0, 6):
+            n = randint(1, 47)
+            line.append(n)
+    return render_template("lotto.html", line=line, num_lines=num_lines)

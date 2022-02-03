@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block main_content %}
+
+    <p>Here are your lotto numbers for this week:</p>
+    <ul>
+        {% for i in range(num_lines) %}
+        <li>{{ line }}</li>
+        {% endfor %}
+    </ul>
+
+{% endblock %}
