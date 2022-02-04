@@ -28,3 +28,4 @@ def bmi():
         height = float(height)
         bmi = weight / (height * height)
         return render_template("bmi_form.html", bmi=bmi, weight=weight, height=height)
+

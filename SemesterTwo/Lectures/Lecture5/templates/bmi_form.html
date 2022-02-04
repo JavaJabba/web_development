@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block main_content %}
+
+<form action="" method="POST" novalidate>
+
+    {{ form.hidden_tag() }} 
+    {{ form.weight.label }}
+    {{ form.weight() }}
+    {% for error in form.weight.errors %}
+        {{ error }}
+    {% endfor %}
+    <br />
+    <br />
+    {{ form.height.label }}
+    {{ form.height() }}
+    {% for error in form.height.errors %}
+        {{ error }}
+    {% endfor %}
+    <br />
+    <br />
+    {{ form.bmi.label }}
+    {{ form.bmi(disabled=true) }}
+    <br />
+    <br />
+    {{ form.submit() }}    
+    
+</form>
+
+{% endblock %}

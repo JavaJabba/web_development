@@ -24,12 +24,10 @@ def morse():
         morse = ""
         morse_dict = {"A":".-", "B":"-...", "C":"-.-.", " ":"/"}
         if message == "":
-            error = "Text Box is blank! Please try again!"
-            return render_template("morse_form.html", error=error)
+            return render_template("morse_form.html", error="Text Box is blank! Please try again!")
         for char in cleaned_message:
             if char not in morse_dict:
-                error = "Invalid Character entered, please try again!"
-                return render_template("morse_form.html", error=error)
+                return render_template("morse_form.html", error="Invalid Character entered, please try again!")
             else:
                 code = morse_dict[char]
                 morse = morse + code + " "
@@ -43,11 +41,9 @@ def lengths():
         inches = request.form["inches"]
         centimetres = request.form["centimetres"]
         if inches == "" and centimetres == "":
-            error = "Please fill in at least one field!"
-            return render_template("lengthform.html", error=error)
+            return render_template("lengthform.html", error="Please fill in at least one field!")
         elif inches != "" and centimetres != "":
-            error = "Please fill in ONLY one field!"
-            return render_template("lengthform.html", error=error)
+            return render_template("lengthform.html", error="Please fill in ONLY one field!")
         elif inches != NULL and centimetres == "":
             inches = float(inches)
             centimetres = inches * 2.54
