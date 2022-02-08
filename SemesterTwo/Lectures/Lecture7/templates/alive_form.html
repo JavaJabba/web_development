@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block main_content %}
+
+    <form action=" " method="POST" novalidate>
+        {{ form.hidden_tag() }}
+        {{ form.alive.label }}
+        {{ form.alive() }}
+        <br />
+        {{ form.submit() }}
+    </form>
+    <p>
+        {{ outcome }}
+    </p>
+    <img src="{{ url_for('static', filename='elvis.jpg') }}" alt="A picture of Elvis">
+
+    <p>
+        <a href="{{ url_for('topping') }}">Go to the Elvis Eats form!</a>
+    </p>
+
+{% endblock %}
