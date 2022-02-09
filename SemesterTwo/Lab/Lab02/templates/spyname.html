@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block main_content %}
+
+<form action="" method="POST">
+
+    <label for="givenname">First Name:</label>
+    <input type="text" name="given_name" size="15" maxlength="15" placeholder="Enter your first name" id="givenname"/>
+    <br />
+    <br />
+    <label for="dob">Date of Birth:</label>
+    <input type="text" name="dob" size="15" maxlength="15" placeholder="yyyy-mm-dd" id="dob"/>
+    <br />
+    <br />
+    <input type="submit">
+    <input type="reset">
+</form>
+
+<p>
+{{spyname}}
+</p>
+
+{% endblock %}

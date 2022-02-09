@@ -53,7 +53,17 @@ def lengths():
             inches = centimetres / 2.54
             return render_template("lengthform.html", inches=inches, centimetres=centimetres)
 
-@app.route("/spy_name")
+@app.route("/spy_name", methods=["GET", "POST"])
 def spyname():
     firstPart = {"A":"Golden", "B":"Red", "C":"Rogue", "D":"Alpha", "E":"Iron", "F":"Secret", "G":"Hot", "H":"Green", "I":"Hugh", "J":"Wild", "K":"Silver", "L":"Slick", "M":"Big", "N":"Deadly", "O":"Flash", "P":"Black", "Q":"Cold", "R":"Wild", "S":"Dark", "T":"Blue", "U":"Stone", "V":"Lone", "W":"Sly", "X":"Sterling", "Y":"Ultimate", "Z":"Rocket"}
-    secondPart = ["Danger", "Spider", "Lightning", "Ghost", "Ninja", "Wolf", "Storm", "Scorpion", "Cobra", "Shadow", "Jaguar", "Jeegoh"]
+    secondPart = {"01":"Danger", "02":"Spider", "03":"Lightning", "04":"Ghost", "05":"Ninja", "06":"Wolf", "07":"Storm", "08":"Scorpion", "09":"Cobra", "10":"Shadow", "11":"Jaguar", "12":"Jeegoh"}
+    if request.method == "GET":
+        return render_template("spyname.html")
+    else:
+        givenName = request.form["given_name"]
+        dob = request.form["dob"]
+        spyFirst = firstPart[givenName[0]]
+        spySecond = secondPart[dob[5:7]]
+        spyname = "Your Spy name is " + spyFirst + " " + spySecond
+        return render_template("spyname.html", givenName=givenName, dob=dob, spyname=spyname)
+
