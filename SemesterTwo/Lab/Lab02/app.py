@@ -1,4 +1,3 @@
-from asyncio.windows_events import NULL
 from flask import Flask, render_template, request
 
 
@@ -44,11 +43,11 @@ def lengths():
             return render_template("lengthform.html", error="Please fill in at least one field!")
         elif inches != "" and centimetres != "":
             return render_template("lengthform.html", error="Please fill in ONLY one field!")
-        elif inches != NULL and centimetres == "":
+        elif inches != "" and centimetres == "":
             inches = float(inches)
             centimetres = inches * 2.54
             return render_template("lengthform.html", inches=inches, centimetres=centimetres)
-        elif centimetres !=NULL and inches == "":
+        elif centimetres != "" and inches == "":
             centimetres = float(centimetres)
             inches = centimetres / 2.54
             return render_template("lengthform.html", inches=inches, centimetres=centimetres)
