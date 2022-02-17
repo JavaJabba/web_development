@@ -11,8 +11,8 @@ class shiftForm(FlaskForm):
     submit = SubmitField("Submit")
 
 class conversionForm(FlaskForm):
-    fromTemp = RadioField("From: ", choices=["Fahrenheit:", "Celsius:", "Kelvin" ])
+    fromTemp = RadioField("From: ", choices=["Fahrenheit:", "Celsius:", "Kelvin:" ])
     fromNo = IntegerField()
-    toTemp = RadioField("To: ", choices=["Fahrenheit:", "Celsius:", "Kelvin" ])
+    toTemp = RadioField("To: ", choices=["Fahrenheit:", "Celsius:", "Kelvin:" ])
     result = IntegerField()
     submit = SubmitField("Submit")
