@@ -1,5 +1,4 @@
 from random import choices
-from tkinter import DISABLED
 from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField, IntegerField, RadioField
 from wtforms.validators import InputRequired, NumberRange
