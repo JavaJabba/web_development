@@ -8,7 +8,7 @@ app = Flask(__name__)
 app.config["SECRET_KEY"] = "secret_key"
 
 @app.route("/shift", methods=["GET", "POST"])
-def shiftCipher():
+def shift():
     form = shiftForm()
     cipherText = ""
     if form.validate_on_submit():

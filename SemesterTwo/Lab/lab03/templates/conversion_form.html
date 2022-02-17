@@ -11,6 +11,7 @@
         {{ form.fromTemp() }}
         {{ form.fromNo() }}
         <br />
+        <img src="{{ url_for('static', filename='image.jpg')}}" alt="nature photo">
         <br />
         {{ form.toTemp.label }}
         {{ form.toTemp() }}
@@ -19,5 +20,9 @@
         <br />
         {{ form.submit() }}
     </form>
+
+    <p>
+        <a href="{{url_for('shift')}}">Temperature Conversion Form</a>
+    </p>
 
 {% endblock %}
