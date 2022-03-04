@@ -7,6 +7,7 @@
     </head>
     <body>
         <header>
+        <img src="{{ url_for('static', filename='logo.png') }}" alt="logo">
         <h1>{{title}}</h1>
         </header>
         {% block main_content %}

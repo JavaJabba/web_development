@@ -1,6 +1,6 @@
 CREATE TABLE Players
 (
-    player_id INT PRIMARY KEY AUTOINCREMENT,
+    player_id INTEGER PRIMARY KEY AUTOINCREMENT,
     first_name varchar(255) NOT NULL,
     last_name varchar(255) NOT NULL,
     date_joined DATE NOT NULL,
@@ -9,7 +9,7 @@ CREATE TABLE Players
 
 CREATE TABLE Games
 (
-    game_id INT PRIMARY KEY AUTOINCREMENT,
+    game_id INTEGER PRIMARY KEY AUTOINCREMENT,
     game_name varchar(255) NOT NULL,
     game_type varchar(255) NOT NULL,
     manufacturer varchar(255) NOT NULL
@@ -17,7 +17,7 @@ CREATE TABLE Games
 
 CREATE TABLE PlayerGameRelation
 (
-    player_id INT NOT NULL,
+    player_id INTEGER NOT NULL,
     game_id INT NOT NULL,
     FOREIGN KEY (player_id) REFERENCES Players(player_id),
     FOREIGN KEY (game_id) REFERENCES Games(game_id),
@@ -27,7 +27,7 @@ CREATE TABLE PlayerGameRelation
 
 CREATE TABLE Faction
 (
-    faction_id INT PRIMARY KEY AUTOINCREMENT,
+    faction_id INTEGER PRIMARY KEY AUTOINCREMENT,
     faction_name varchar(255) NOT NULL,
     alliance varchar(255) NOT NULL
 );
@@ -67,7 +67,8 @@ VALUES
     ("Gaslands", "28mm Skirmish Racing", "Planet Smasher Games"),
     ("Silver Bayonet", "28mm Historical Fiction Skirmish Game", "Osprey Publishing");
 
-INSERT INTO Factions(faction_name, alliance)
+INSERT INTO Faction(faction_name, alliance)
+VALUES
     ("German", "Axis"),
     ("Japanese", "Axis"),
     ("French", "Allied"),
