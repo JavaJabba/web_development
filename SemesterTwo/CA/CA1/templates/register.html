@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+
+{% block main_content %}
+
+<form action=" " method="POST" novalidate>
+    {{ form.hidden_tag() }}
+    {{ form.player_id.label }}
+    {{ form.player_id() }}
+    {% for error in form.player_id.errors %}
+        {{ error }}
+    {% endfor %}
+    <br />
+    <br />
+    {{ form.password.label }}
+    {{ form.password() }}
+    {% for error in form.password.errors %}
+        {{ error }}
+    {% endfor %}
+    <br />
+    <br />
+    {{ form.password2.label }}
+    {{ form.password2() }}
+    {% for error in form.password2.errors %}
+        {{ error }}
+    {% endfor %}
+    <br />
+    <br />
+    {{ form.first_name.label }}
+    {{ form.first_name() }}
+    {% for error in form.first_name.errors %}
+        {{ error }}
+    {% endfor %}
+    <br />
+    <br />
+    {{ form.last_name.label }}
+    {{ form.last_name() }}
+    {% for error in form.last_name.errors %}
+        {{ error }}
+    {% endfor %}
+    <br />
+    <br />
+    {{ form.games.label }}
+    {{ form.games() }}
+    {% for error in form.password.errors %}
+        {{ error }}
+    {% endfor %}
+    <br />
+    <br />
+    {{ form.factions.label }}
+    {{ form.factions() }}
+    {% for error in form.factions.errors %}
+        {{ error }}
+    {% endfor %}
+    <br />
+    <br />
+    {{ form.date_joined.label }}
+    {{ form.date_joined() }}
+    {% for error in form.date_joined.errors %}
+        {{ error }}
+    {% endfor %}
+    <br />
+    <br />
+    {{ form.submit() }}
+</form>
+
+<p>
+    <a href="{{ url_for('register') }}">Register Here!</a>
+</p>
+
+{% endblock %}
