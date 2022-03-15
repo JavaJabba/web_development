@@ -2,12 +2,14 @@
 
 {% block main_content %}
 
-<p>
-    <a href="{{ url_for('login') }}">Login!</a>
-</p>
-
+{% if "player_id" not in session %}
 <p>
     <a href="{{ url_for('register') }}">Register Here!</a>
+</p>
+{% endif %}
+
+<p>
+    <a href="{{ url_for('findplayers') }}">Find Players!</a>
 </p>
 
 <p>

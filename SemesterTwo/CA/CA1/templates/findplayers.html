@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block main_content %}
+<h2><a href="{{ url_for('index') }}">Home</a></h2>
+
+<form action=" " method="POST" novalidate>
+    {{ form.hidden_tag() }}
+    {{ form.games.label }}
+    {{ form.games() }}
+    {% for error in form.games.errors %}
+        {{ error }}
+    {% endfor %}
+    <br />
+    <br />
+    {{ form.factions.label }}
+    {{ form.factions() }}
+    {% for error in form.factions.errors %}
+        {{ error }}
+    {% endfor %}
+    <br />
+    <br />
+    {{ form.submit() }}
+</form>
+
+      {% if "game_name" in session %}
+        <p>session[game_name]</p>
+      {% elif "faction_name" in session %}
+        <p>session[faction_name]</p>
+    {% endif %}
+    
+{% endblock %}

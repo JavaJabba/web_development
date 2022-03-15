@@ -1,5 +1,5 @@
 form {
-    border: 1px solid blue;
+    border: 1px solid black;
     padding: 2em;
     margin: 2em auto;
 }
@@ -11,12 +11,17 @@ label {
     clear: left;
     margin-right: 1em;
 }
+
+header{
+    align-items: center;
+}
     
 input[type="text"] {
     margin-bottom: 1em;
 }
     
 img {
-    max-width: 500px;
+    max-width: 200px;
     display: block;
+    align-items: left;
 }

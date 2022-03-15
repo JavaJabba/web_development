@@ -1,6 +1,6 @@
 from datetime import date
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, SubmitField, SelectMultipleField, DateField
+from wtforms import StringField, PasswordField, SubmitField, SelectField, DateField
 from wtforms.validators import InputRequired, EqualTo
 
 class LoginForm(FlaskForm):
@@ -14,7 +14,17 @@ class RegisterForm(FlaskForm):
     password2 = PasswordField("Repeat password:", validators=[InputRequired(), EqualTo("password")])
     first_name = StringField("First name:", validators=[InputRequired()])
     last_name = StringField("last name:", validators=[InputRequired()])
-    games = SelectMultipleField("What games do you play?", validate_choice=False ,validators=[InputRequired()], choices=["Warhammer: Age of Sigmar", "Warhammer: 40'000", "Bolt Action", "Marvel Crisis Protocol", "Gaslands", "Silver Bayonet"])
-    factions = SelectMultipleField("What factions do you play?", validate_choice=False , validators=[InputRequired()], choices=["German", "Japanese", "French", "British", "Soviet Union", "Italian", "Space Marines", "Orks", "World Eaters", "Daemons", "Imperial Guard", "Sisters of Battle", "Drukari", "Orruk Warclans", "Orge Mawclans", "Stormcast Eternals", "Idoneth Deepkin", "Blades of Khorne", "Maggotkin of Nurgle", "Slaves to Darkness", "Lumineth Realmlords", "Tau", "Adeptus Mechanicus"])
+    games = SelectField("What games do you play?", validate_choice=False ,validators=[InputRequired()], choices=["Warhammer: Age of Sigmar", "Warhammer: 40'000", "Bolt Action", "Marvel Crisis Protocol", "Gaslands", "Silver Bayonet"])
+    factions = SelectField("What factions do you play?", validate_choice=False , validators=[InputRequired()], choices=["German", "Japanese", "French", "British", "Soviet Union", "Italian", "Space Marines", "Orks", "World Eaters", "Daemons", "Imperial Guard", "Sisters of Battle", "Drukari", "Orruk Warclans", "Orge Mawclans", "Stormcast Eternals", "Idoneth Deepkin", "Blades of Khorne", "Maggotkin of Nurgle", "Slaves to Darkness", "Lumineth Realmlords", "Tau", "Adeptus Mechanicus"])
     date_joined = DateField("What date did you join?")
+    submit = SubmitField("Submit")
+
+class FindPlayersForm(FlaskForm):
+    games = SelectField("Game:", validate_choice=False ,validators=[InputRequired()], choices=["Warhammer: Age of Sigmar", "Warhammer: 40'000", "Bolt Action", "Marvel Crisis Protocol", "Gaslands", "Silver Bayonet"])
+    factions = SelectField("Faction", validate_choice=False, choices=["German", "Japanese", "French", "British", "Soviet Union", "Italian", "Space Marines", "Orks", "World Eaters", "Daemons", "Imperial Guard", "Sisters of Battle", "Drukari", "Orruk Warclans", "Orge Mawclans", "Stormcast Eternals", "Idoneth Deepkin", "Blades of Khorne", "Maggotkin of Nurgle", "Slaves to Darkness", "Lumineth Realmlords", "Tau", "Adeptus Mechanicus"])
+    submit = SubmitField("Submit")
+
+class AddGames(FlaskForm):
+    games = SelectField("Game:", validate_choice=False ,validators=[InputRequired()], choices=["Warhammer: Age of Sigmar", "Warhammer: 40'000", "Bolt Action", "Marvel Crisis Protocol", "Gaslands", "Silver Bayonet"])
+    factions = SelectField("Faction", validate_choice=False, choices=["German", "Japanese", "French", "British", "Soviet Union", "Italian", "Space Marines", "Orks", "World Eaters", "Daemons", "Imperial Guard", "Sisters of Battle", "Drukari", "Orruk Warclans", "Orge Mawclans", "Stormcast Eternals", "Idoneth Deepkin", "Blades of Khorne", "Maggotkin of Nurgle", "Slaves to Darkness", "Lumineth Realmlords", "Tau", "Adeptus Mechanicus"])
     submit = SubmitField("Submit")

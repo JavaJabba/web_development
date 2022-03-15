@@ -5,21 +5,23 @@
 
 <form action=" " method="POST" novalidate>
     {{ form.hidden_tag() }}
-    {{ form.player_id.label }}
-    {{ form.player_id() }}
-    {% for error in form.player_id.errors %}
+    {{ form.games.label }}
+    {{ form.games() }}
+    {% for error in form.games.errors %}
         {{ error }}
     {% endfor %}
     <br />
     <br />
-    {{ form.password.label }}
-    {{ form.password() }}
-    {% for error in form.password.errors %}
+    {{ form.factions.label }}
+    {{ form.factions() }}
+    {% for error in form.factions.errors %}
         {{ error }}
     {% endfor %}
     <br />
     <br />
     {{ form.submit() }}
 </form>
+
+    <p>{{ message }}</p>
 
 {% endblock %}

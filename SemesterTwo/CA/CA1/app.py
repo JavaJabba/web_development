@@ -1,13 +1,17 @@
-from tabnanny import check
 from flask import Flask, render_template, url_for, redirect, session, g, request
 from database import close_db, get_db
 from flask_session import Session
 from werkzeug.security import generate_password_hash, check_password_hash
-from forms import RegisterForm, LoginForm
+from forms import RegisterForm, LoginForm, FindPlayersForm, AddGames
 from functools import wraps
 
 '''
+Function of this program is to create users based on members of the club and have information stored about when they joined, 
+what games they play and what factions within those games they play. A User can log on, search to see how many players play a given faction 
+or game as well as go to their account details and add new games or factions they have picked up.
 
+More functionality was planned such as a admin user, the ability for a user to also delete a game or faction from their account, the ability
+for the admin to add more games and faction choices but alas, I ran out of time.
 '''
 
 app = Flask(__name__)
@@ -46,11 +50,11 @@ def register():
             form.player_id.errors.append("Username Taken")
         else:
             db.execute("""INSERT INTO Players (player_id, password, first_name, last_name, date_joined) VALUES (?,?,?,?,?);""", (player_id, generate_password_hash(password), first_name, last_name, date_joined))
-            db.execute("""INSERT INTO PlayerGameRelation (player_id, game_name) VALUES (?,?)""", (player_id, game))
-            db.execute("""INSERT INTO PlayerFactionRelation (player_id, faction_name) VALUES (?,?)""", (player_id, faction))
+            db.execute("""INSERT INTO PlayerGameRelation (player_id, game_name) VALUES (?,?);""", (player_id, game))
+            db.execute("""INSERT INTO PlayerFactionRelation (player_id, faction_name) VALUES (?,?);""", (player_id, faction))
             db.commit()
             return redirect(url_for("login"))
-    return render_template("register.html", form=form)
+    return render_template("register.html", form=form, title="Register")
 
 @app.route("/login", methods=["GET", "POST"])
 def login():
@@ -68,7 +72,7 @@ def login():
             session.clear()
             session["player_id"] = player_id
             return redirect(url_for("index"))
-    return render_template("login.html", form=form)
+    return render_template("login.html", form=form, title="Login")
 
 @app.route("/logout")
 def logout():
@@ -77,17 +81,38 @@ def logout():
 
 @app.route("/", methods=["GET", "POST"])
 def index():
-    return render_template("index.html")
+    return render_template("index.html", title="Home")
 
+@app.route("/findplayers", methods=["GET","POST"])
+def findplayers():
+    form = FindPlayersForm()
+    if "player_id" not in session:
+        return redirect(url_for("login"))
+    elif form.validate_on_submit():
+        game_name = form.games.data
+        faction_name = form.factions.data
+        db = get_db()
+        game_query = db.execute(""" SELECT COUNT(player_id) FROM PlayerGameRelation WHERE game_name = ?;""", (game_name,)).fetchone()
+        faction_query = db.execute(""" SELECT COUNT(player_id) FROM PlayerFactionRelation WHERE faction_name = ?; """, (faction_name,)).fetchone()
+        session["game_name"] = game_name
+        session["faction_name"] = faction_name
+        session["game_query"] = game_query
+        session["faction_query"] = faction_query
+    return render_template("findplayers.html", form=form, title="Find Players!")
 
 
 @app.route("/account", methods=["GET","POST"])
 def account():
+    form = AddGames()
+    if "player_id" not in session:
+        return redirect(url_for("login"))
+    elif form.validate_on_submit():
+        game_name = form.games.data
+        faction_name = form.factions.data
+        db = get_db()
+        db.execute("""INSERT INTO PlayerGameRelation (player_id, game_name) VALUES (?,?)""", (session["player_id"], game_name))
+        db.execute("""INSERT INTO PlayerFactionRelation (player_id, faction_name) VALUES (?,?)""", (session["player_id"], faction_name))
+        message = "Game Added"
+    return render_template("account.html", form=form, title="Account")
 
-    '''
-    various user details with selectfields that can be changed.
 
-    adding new games and factions to your account
-
-    possible change password??
-    '''

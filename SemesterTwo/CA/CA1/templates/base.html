@@ -9,6 +9,11 @@
         <header>
         <img src="{{ url_for('static', filename='logo.png') }}" alt="logo">
         <h1>{{title}}</h1>
+            {% if "player_id" in session %}
+                <p>Welcome, {{session["player_id"]}}, <a href="{{ url_for('logout') }}">Logout!</a>, <a href="{{ url_for('account') }}">Account!</a></p>
+            {% else %}
+                <p><a href="{{ url_for('login') }}">Login!</a></p>
+            {% endif %}
         </header>
         {% block main_content %}
 
