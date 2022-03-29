@@ -68,6 +68,12 @@ def logout():
 def index():
     return render_template("index.html")
 
-@app.route("/play", methods=["GET", "POST"])
+@app.route("/play")
 def play():
     return render_template("play.html")
+
+@app.route("/store_score", methods=["POST"])
+def store_score():
+    score = int(request.form["score"])
+    #insert into table
+    return "Success"

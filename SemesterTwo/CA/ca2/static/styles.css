@@ -1,0 +1,21 @@
+canvas {
+    background-color: black;
+    display: block;
+    margin: 1em auto;
+}
+    
+label {
+    float: left;
+    width: 5em;
+    text-align: right;
+    clear: left;
+    margin-right: 1em;
+}
+    
+input[type="text"] {
+    margin-bottom: 1em;
+}
+    
+img {
+    display: block;
+}
