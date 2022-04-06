@@ -150,38 +150,51 @@ function draw() {
         player.y = -player.height;
     }
 
+    
 
     //enemy
     if (enemy.length < 30) {
         let e = {
-            x : randint(0, canvas.width),
+            x : randint(0, canvas.width), 
             y : randint(0, canvas.height),
             height : 32,
             width : 32,
-            xChange : player.xChange/2,
-            yChange : player.yChange/2,
+            xChange : 1,
+            yChange : 1,
         };
         enemy.push(e);
+    }
+    for (let e of enemy) {
+        let enemySpawn = 0;
+        if(enemySpawn === enemySpawn % 2){
+            e.y = 0;
+        } else {
+            e.x = 0;
+        }
+        enemySpawn += 1;
         context.drawImage(IMAGES.enemy, e.x, e.y);
-    
-        for (let e of enemy) {
-            e.x = player.x + e.xChange;
-            e.y = player.y + e.yChange;
-            e.yChange = e.yChange * 0.9;
-            e.xChange = e.xChange * 0.9;
+    }
 
-            if (e.x + e.width < 0){
-                e.x = canvas.width;
-            } else if (e.x > canvas.width){
-                e.x = -e.width;
-            } else if (e.y + e.height < 0){
-                e.y = canvas.height;
-            } else if (e.y > canvas.height){
-                e.y = -e.height;
-            }
+    for (let e of enemy) {
+        // update enemy
+        e.x = player.x - e.xChange;
+        e.y = player.y - e.yChange;
+
+        //physics
+        e.yChange = e.yChange * 0.9;
+        e.xChange = e.xChange * 0.9;
+
+        //enemies going off screen
+        if (e.x + e.width < 0){
+            e.x = canvas.width;
+        } else if (e.x > canvas.width){
+            e.x = -e.width;
+        } else if (e.y + e.height < 0){
+            e.y = canvas.height;
+        } else if (e.y > canvas.height){
+            e.y = -e.height;
         }
     }
-    
 
     // Score
     score = score + 1
