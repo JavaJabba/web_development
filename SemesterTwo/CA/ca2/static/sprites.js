@@ -1,50 +1,51 @@
 let canvas;
 let context;
 
-let fpsInterval = 1000/30;
+let fpsInterval = 1000 / 30;
 let now;
 let then = Date.now();
 let xhttp;
 
 let backgroundImage = new Image();
 let background = [
-    [2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2],
-    [2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2],
-    [2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2],
-    [2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2],
-    [2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2],
-    [2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2],
-    [2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2],
-    [2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2],
-    [2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2],
-    [2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2],
-    [2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2],
-    [2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2],
-    [2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2],
-    [2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2],
-    [2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2],
-    [2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2],
-    [2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2],
-    [2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2],
-    [2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2],
-    [2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2]
+    [2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2],
+    [2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2],
+    [2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2],
+    [2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2],
+    [2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2],
+    [2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2],
+    [2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2],
+    [2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2],
+    [2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2],
+    [2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2],
+    [2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2],
+    [2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2],
+    [2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2],
+    [2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2],
+    [2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2],
+    [2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2],
+    [2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2],
+    [2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2],
+    [2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2],
+    [2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2]
 ];
 
 let tilesPerRow = 8;
 let tileSize = 32;
 
 let player = {
-    x : 0,
-    y : 0,
-    width : 38,
-    height : 32,
-    frameX : 0,
-    frameY : 0,
-    xChange : 0,
-    yChange : 0,
+    x: 0,
+    y: 0,
+    width: 38,
+    height: 32,
+    frameX: 0,
+    frameY: 0,
+    xChange: 0,
+    yChange: 0,
     facing: "none"
 };
 
+let enemySpawn = 2;
 let enemy = [];
 let score = 0;
 let playerImage = new Image();
@@ -54,11 +55,11 @@ let moveRight = false;
 let moveUp = false;
 let moveDown = false;
 
-let IMAGES = {player: "static/player.png", background: "static/tileset.png", enemy: "static/enemy1.png"};
+let IMAGES = { player: "static/player.png", background: "static/tileset.png", enemy: "static/enemy1.png" };
 
 document.addEventListener("DOMContentLoaded", init, false);
 
-function init(){
+function init() {
     canvas = document.querySelector("canvas");
     context = canvas.getContext("2d");
 
@@ -84,16 +85,16 @@ function draw() {
     then = now - (elapsed % fpsInterval);
 
     //draw background
-    context.clearRect(0,0, canvas.width, canvas.height);
+    context.clearRect(0, 0, canvas.width, canvas.height);
     context.fillStyle = "#7cfc00";
     context.fillRect(0, 0, canvas.width, canvas.height);
     for (let r = 0; r < 20; r += 1) {
-        for (let c = 0; c < 32; c +=1){
-        let tile = background[r][c];
-        if (tile >= 0){
-            let tileRow = Math.floor(tile / tilesPerRow);
-            let tileCol = Math.floor(tile % tilesPerRow);
-            context.drawImage(IMAGES.background, tileCol * tileSize, tileRow * tileSize, tileSize, tileSize, c * tileSize, r * tileSize, tileSize, tileSize);
+        for (let c = 0; c < 32; c += 1) {
+            let tile = background[r][c];
+            if (tile >= 0) {
+                let tileRow = Math.floor(tile / tilesPerRow);
+                let tileCol = Math.floor(tile % tilesPerRow);
+                context.drawImage(IMAGES.background, tileCol * tileSize, tileRow * tileSize, tileSize, tileSize, c * tileSize, r * tileSize, tileSize, tileSize);
             }
         }
     }
@@ -123,10 +124,10 @@ function draw() {
     }
 
     // still needs work, maybe different sprite needed for separate N/S movement
-    if ((moveUp || moveDown ) && player.facing === "left") {
+    if ((moveUp || moveDown) && player.facing === "left") {
         player.frameY = 9;
         player.frameX = (player.frameX + 1) % 8;
-    } else if ((moveUp || moveDown) && player.facing === "right"){
+    } else if ((moveUp || moveDown) && player.facing === "right") {
         player.frameY = 1;
         player.frameX = (player.frameX + 1) % 8;
     }
@@ -140,69 +141,73 @@ function draw() {
     player.xChange = player.xChange * 0.9;
 
     // Going off screen
-    if (player.x + player.width < 0){
+    if (player.x + player.width < 0) {
         player.x = canvas.width;
-    } else if (player.x > canvas.width){
+    } else if (player.x > canvas.width) {
         player.x = -player.width;
-    } else if (player.y + player.height < 0){
+    } else if (player.y + player.height < 0) {
         player.y = canvas.height;
-    } else if (player.y > canvas.height){
+    } else if (player.y > canvas.height) {
         player.y = -player.height;
     }
 
-    
+
 
     //enemy
     if (enemy.length < 30) {
         let e = {
-            x : randint(0, canvas.width), 
-            y : randint(0, canvas.height),
-            height : 32,
-            width : 32,
-            xChange : 1,
-            yChange : 1,
+            x: randint(0, canvas.width),
+            y: randint(0, canvas.height),
+            height: 32,
+            width: 32,
+            xChange: 1,
+            yChange: 1,
         };
         enemy.push(e);
-    }
-    for (let e of enemy) {
-        let enemySpawn = 0;
-        if(enemySpawn === enemySpawn % 2){
-            e.y = 0;
-        } else {
-            e.x = 0;
-        }
-        enemySpawn += 1;
         context.drawImage(IMAGES.enemy, e.x, e.y);
     }
 
-    for (let e of enemy) {
-        // update enemy
-        e.x = player.x - e.xChange;
-        e.y = player.y - e.yChange;
+    // for (let e of enemy) {
+    //     if (enemySpawn === enemySpawn % 2 === 0) {
+    //         e.y = 0;
+    //     } else if (enemySpawn === enemySpawn % 3 === 0) {
+    //         e.y = canvas.height;
+    //     } else if (enemySpawn === enemySpawn % 4 === 0) {
+    //         e.x = 0;
+    //     } else if (enemySpawn === enemySpawn % 5 === 0) {
+    //         e.x = canvas.width;
+    //     }
+    // enemySpawn = enemySpawn + 1;
+    // } while (enemy.length < 30)
 
-        //physics
-        e.yChange = e.yChange * 0.9;
-        e.xChange = e.xChange * 0.9;
+        for (let e of enemy) {
+            // update enemy
+            e.x = player.x - e.xChange;
+            e.y = player.y - e.yChange;
 
-        //enemies going off screen
-        if (e.x + e.width < 0){
-            e.x = canvas.width;
-        } else if (e.x > canvas.width){
-            e.x = -e.width;
-        } else if (e.y + e.height < 0){
-            e.y = canvas.height;
-        } else if (e.y > canvas.height){
-            e.y = -e.height;
+            //physics
+            e.yChange = e.yChange * 0.9;
+            e.xChange = e.xChange * 0.9;
+
+            //enemies going off screen
+            if (e.x + e.width < 0) {
+                e.x = canvas.width;
+            } else if (e.x > canvas.width) {
+                e.x = -e.width;
+            } else if (e.y + e.height < 0) {
+                e.y = canvas.height;
+            } else if (e.y > canvas.height) {
+                e.y = -e.height;
+            }
         }
-    }
 
     // Score
     score = score + 1
 }
 
-function activate(event){
+function activate(event) {
     let key = event.key;
-    if (key === "a"){
+    if (key === "a") {
         moveLeft = true;
     } else if (key === "w") {
         moveUp = true;
@@ -213,9 +218,9 @@ function activate(event){
     }
 }
 
-function deactivate(event){
+function deactivate(event) {
     let key = event.key;
-    if (key === "a"){
+    if (key === "a") {
         moveLeft = false;
     } else if (key === "w") {
         moveUp = false;
@@ -247,9 +252,9 @@ function stop(outcome) {
 }
 
 function handle_response() {
-    if (xhttp.readyState === 4){
-        if (xhttp.status === 200){
-            if (xhttp.responseText === "success"){
+    if (xhttp.readyState === 4) {
+        if (xhttp.status === 200) {
+            if (xhttp.responseText === "success") {
 
             } else {
 
@@ -260,8 +265,8 @@ function handle_response() {
 
 function load_images(callback) {
     let num_images = Object.keys(IMAGES).length;
-    let loaded = function(){
-        num_images = num_images -1;
+    let loaded = function () {
+        num_images = num_images - 1;
         if (num_images === 0) {
             callback();
         }
@@ -272,4 +277,4 @@ function load_images(callback) {
         img.src = IMAGES[name];
         IMAGES[name] = img;
     }
- }
+}
