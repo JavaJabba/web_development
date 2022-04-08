@@ -1,5 +1,6 @@
 let canvas;
 let context;
+let request_id;
 
 let fpsInterval = 1000 / 30;
 let now;
@@ -36,8 +37,7 @@ let tileSize = 32;
 let player = {
     x: 0,
     y: 0,
-    width: 38,
-    height: 32,
+    size: 34,
     frameX: 0,
     frameY: 0,
     xChange: 0,
@@ -45,7 +45,7 @@ let player = {
     facing: "none"
 };
 
-let enemySpawn = 2;
+let enemySpawn = 0;
 let enemy = [];
 let score = 0;
 let playerImage = new Image();
@@ -54,6 +54,7 @@ let moveLeft = false;
 let moveRight = false;
 let moveUp = false;
 let moveDown = false;
+let attack = false;
 
 let IMAGES = { player: "static/player.png", background: "static/tileset.png", enemy: "static/enemy1.png" };
 
@@ -99,8 +100,6 @@ function draw() {
         }
     }
 
-    //draw player
-    context.drawImage(IMAGES.player, player.frameX * player.width, player.frameY * player.height, player.width, player.height, player.x, player.y, player.width, player.height);
 
     if (moveLeft) {
         player.xChange = player.xChange - 1;
@@ -122,87 +121,123 @@ function draw() {
         player.yChange = player.yChange + 1;
         player.facing = "down";
     }
+    /* Attack attempt
+    if (attack && facing === "left") {
+        attack = true;
+        player.frameY = 11;
+        player.frameX = (player.frameX + 1) % 6
+    }
+    if (attack && facing === "right") {
+        attack = true;
+        player.frameY = 2;
+        player.frameX = (player.frameX + 1) % 6
+    }*/
 
-    // still needs work, maybe different sprite needed for separate N/S movement
+
+    /*Scrap animation work
     if ((moveUp || moveDown) && player.facing === "left") {
         player.frameY = 9;
         player.frameX = (player.frameX + 1) % 8;
     } else if ((moveUp || moveDown) && player.facing === "right") {
         player.frameY = 1;
         player.frameX = (player.frameX + 1) % 8;
-    }
+    }*/
 
     //update player
-    player.x = player.x + player.xChange
-    player.y = player.y + player.yChange
+    player.x = player.x + player.xChange;
+    player.y = player.y + player.yChange;
 
     //Physics
     player.yChange = player.yChange * 0.9;
     player.xChange = player.xChange * 0.9;
 
     // Going off screen
-    if (player.x + player.width < 0) {
+    if (player.x + player.size < 0) {
         player.x = canvas.width;
     } else if (player.x > canvas.width) {
-        player.x = -player.width;
-    } else if (player.y + player.height < 0) {
+        player.x = -player.size;
+    } else if (player.y + player.size < 0) {
         player.y = canvas.height;
     } else if (player.y > canvas.height) {
-        player.y = -player.height;
+        player.y = -player.size;
     }
 
-
-
     //enemy
-    if (enemy.length < 30) {
+    if (enemy.length < 5) {
         let e = {
-            x: randint(0, canvas.width),
+            x: 0,
             y: randint(0, canvas.height),
             height: 32,
             width: 32,
-            xChange: 1,
-            yChange: 1,
+            size: 10,
+            xChange: 1.5,
+            yChange: 1.5,
         };
         enemy.push(e);
+        
+    }
+    //spawn enemy
+    for (let e of enemy) {
         context.drawImage(IMAGES.enemy, e.x, e.y);
     }
 
-    // for (let e of enemy) {
-    //     if (enemySpawn === enemySpawn % 2 === 0) {
-    //         e.y = 0;
-    //     } else if (enemySpawn === enemySpawn % 3 === 0) {
-    //         e.y = canvas.height;
-    //     } else if (enemySpawn === enemySpawn % 4 === 0) {
-    //         e.x = 0;
-    //     } else if (enemySpawn === enemySpawn % 5 === 0) {
-    //         e.x = canvas.width;
-    //     }
-    // enemySpawn = enemySpawn + 1;
-    // } while (enemy.length < 30)
+    //draw player
+    context.drawImage(IMAGES.player, player.frameX * 38, player.frameY * 32, 38, 32, player.x, player.y, 38, 32);
 
-        for (let e of enemy) {
-            // update enemy
-            e.x = player.x - e.xChange;
-            e.y = player.y - e.yChange;
-
-            //physics
-            e.yChange = e.yChange * 0.9;
-            e.xChange = e.xChange * 0.9;
-
-            //enemies going off screen
-            if (e.x + e.width < 0) {
-                e.x = canvas.width;
-            } else if (e.x > canvas.width) {
-                e.x = -e.width;
-            } else if (e.y + e.height < 0) {
-                e.y = canvas.height;
-            } else if (e.y > canvas.height) {
-                e.y = -e.height;
-            }
+    for (let e of enemy) {
+        //enemies going off screen
+        if (e.x + e.size < 0) {
+            e.x = canvas.width;
+        } else if (e.x > canvas.width) {
+            e.x = -e.size;
+        } else if (e.y + e.size < 0) {
+            e.y = canvas.height;
+        } else if (e.y > canvas.height) {
+            e.y = -e.size;
+        }
+    }
+    
+    //move towards player depending on location
+    for (let e of enemy){
+        if (e.x < player.x) {
+            e.x = e.x + e.xChange;
+        } else if (e.x > player.x) {
+            e.x = e.x - e.xChange;
+        } else if (e.x === player.x && e.y < player.y){
+            e.y = e.y + e.yChange;
+        } else if (e.x === player.x && e.y > player.y){
+            e.y = e.y - e.yChange;
         }
 
+        if (e.y < player.y) {
+            e.y = e.y + e.yChange;
+        } else if (e.y > player.y) {
+            e.y = e.y - e.yChange;
+        } else if (e.y === player.y && e.x < player.x){
+            e.x = e.x + e.xChange;
+        } else if (e.y === player.y && e.x > player.x){
+            e.x = e.x - e.xChange;
+        }
+    }
+
+    //if player collides with enemy 
+    for (let e of enemy) {
+        if (player_collides(e)) {
+            stop();
+            return;
+        }
+    }
+
+    // attempt at making enemies move away from each other to avoid overlap
+    // for (let e of enemy) {
+    //     if (enemy_collides(enemy, e)) {
+    //         enemy.y = enemy.y + 1;
+    //         e.y = e.y - 1;
+    //     }
+    // }
+
     // Score
-    score = score + 1
+    score = score + 1;
 }
 
 function activate(event) {
@@ -215,6 +250,10 @@ function activate(event) {
         moveRight = true;
     } else if (key === "s") {
         moveDown = true;
+    }
+
+    if (key === "e"){
+        attack = true;
     }
 }
 
@@ -229,7 +268,47 @@ function deactivate(event) {
     } else if (key === "s") {
         moveDown = false;
     }
+
+    if (key === "e"){
+        attack = false;
+    }
 }
+
+
+function player_collides(e) {
+    if (player.x + player.size < e.x ||
+        e.x + e.size < player.x ||
+        player.y > e.y + e.size ||
+        e.y > player.y + player.size) {
+        return false;
+    } else {
+        return true;
+    }
+}
+
+function enemy_collides(enemy, e) {
+    if (enemy.x + enemy.size < e.x ||
+        e.x + e.size < enemy.x ||
+        enemy.y > e.y + e.size ||
+        e.y > enemy.y + enemy.size) {
+        return false;
+    } else {
+        return true;
+    }
+}
+
+//attempt at player attacks.
+// function player_attack(e){
+//     if (attack) {
+//         for (let e of enemy){
+//             if (e.x === player.x + player.size ||
+//                 e.x === player.x - player.size){
+//                 enemy.delete(e)
+//             }
+//         }   
+//     }
+// }
+
 
 function randint(min, max) {
     return Math.round(Math.random() * (max - min)) + min;
@@ -251,17 +330,17 @@ function stop(outcome) {
     xhttp.send(data);
 }
 
-function handle_response() {
-    if (xhttp.readyState === 4) {
-        if (xhttp.status === 200) {
-            if (xhttp.responseText === "success") {
+// function handle_response() {
+//     if (xhttp.readyState === 4) {
+//         if (xhttp.status === 200) {
+//             if (xhttp.responseText === "success") {
 
-            } else {
+//             } else {
 
-            }
-        }
-    }
-}
+//             }
+//         }
+//     }
+// }
 
 function load_images(callback) {
     let num_images = Object.keys(IMAGES).length;

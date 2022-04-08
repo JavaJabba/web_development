@@ -5,3 +5,4 @@ CREATE TABLE Players(
     password varchar(255),
     highscore INT DEFAULT 0
 );
+

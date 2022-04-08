@@ -27,7 +27,7 @@ def login_required(view):
 
 @app.route("/login", methods=["GET", "POST"])
 def login():
-    form =LoginForm()
+    form = LoginForm()
     if form.validate_on_submit():
         player_id = form.player_id.data
         password = form.password.data
@@ -70,10 +70,16 @@ def index():
 
 @app.route("/play")
 def play():
+    # if "player_id" not in Session:
+    #     return redirect(url_for("login"))
     return render_template("play.html")
 
 @app.route("/store_score", methods=["POST"])
 def store_score():
     score = int(request.form["score"])
-    #insert into table
+    db = get_db()
+    score_check = db.execute("""SELECT highscore FROM Players WHERE player_id = ?;""", (session["player_id"],)).fetchone()
+    if score > score_check:
+        db.execute("""UPDATE Players Set highscore = ? WHERE player_id = ?;""", (score, session["player_id"]))
+        db.commit()
     return "Success"
